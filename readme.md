@@ -19,19 +19,6 @@ We write a terraform configuration file to achieve this deployment.Which is not 
 We Then ensure the application is set-up and we run it using the following command
 go run ./worker/main.go
 
-That command starts the worker processes for running thw workflows connected to the application To start up the application and execute the application we look at the below snippet and output go run ./starter/main.go
-
-Worker application
-
-Now we have seen the worker started, lets now view the web UI to see the workflow execution
-
-WEB UI
-
-Now that we have the web UI running completed status on the workflow, lets try to chenge it's input and lets see if we still have a resilient service Code Change Snippet
-
-With that change lets look at the UI for the mode of its operation **Mode of operation
-
-Then lets see what happens after its completed Completed status
 
 Since we see how this server operates lets examine how to work with CI/CD
 
@@ -41,6 +28,8 @@ To deploy Temporal-server on a dashboard in a kubernetes environment run the fol
 cd kubernetes && cd k8s && kubectl apply -f .
 
 And we have the Dashboard present HERE
+
+<img width="960" alt="temporal" src="https://user-images.githubusercontent.com/111136362/216768464-62584a06-c2f5-407f-aef8-6a1565605a24.PNG">
 
 Temporal UI on Kuberenetes
 
