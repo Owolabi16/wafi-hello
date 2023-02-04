@@ -1,47 +1,59 @@
-### Test workflow
 
+This deployment is done usind the following stacks
 
+Jenkins ⚡️⚡️⚡️⚡️⚡️
+Kubernetes✨
+Docker✨
+Temporal-server✨
+Golang✨
+Lets Get into it shall we... We start first with the setup of the temporal server and we use Docker-compose for this setup by editing some files and ensure the server and it's relevant dependencies are set-up
 
-Hi, If you are viewing this, it is because you scaled through to the next round of the recruitment for the  DevOps position at Wafi. Congratulations 🎉✨.
+RUN THE FOLLOWING COMMAND
 
-At Wafi, we use the microservice software architecture. The microservices approach to software development helps teams deploy faster, but it comes with some issues, one of them is data consistency. How can data change in microservice A be propagated to microservice B and C? Send it via an event?
+cd Kubernetes docker-compose up -d
 
-Yes, that works but what if B updates itself and C had an hiccups and just could not make the update 🙄.
+After the server is up and running we setup the cluster that will be deployed using terraform.
 
-Then that means we need to have a mechanism that allows us to handle such failures, make retries and what-else? Just how many of the situations like above do we have to write failures and retry logic for? 
+We write a terraform configuration file to achieve this deployment.Which is not a subject of this deployment
 
-At Wafi, we use [Temporal](https://temporal.io) as a microservice orchestrator which helps solve the issues stated above for us.
-
-## Your task
-
-* Deploy a temporal cluster for production. Follow the deployment guide [here](https://docs.temporal.io/docs/server/production-deployment). A plus is if you are able to implement any of the security considerations stated [here](https://docs.temporal.io/docs/server/security)
-
-* Package this temporal app as a docker image
-  * write a CICD for the app.
-  * deploy the app using Kubernetes
-  * How would you improve this app?
-
-
-
-This is required for the worker to be up
-
-```bash
+We Then ensure the application is set-up and we run it using the following command
 go run ./worker/main.go
-```
 
-​	
+That command starts the worker processes for running thw workflows connected to the application To start up the application and execute the application we look at the below snippet and output go run ./starter/main.go
 
-Execute the helloworkflow
+Worker application
 
-```bash
-go run ./starter/main.go
-```
+Now we have seen the worker started, lets now view the web UI to see the workflow execution
 
+WEB UI
 
+Now that we have the web UI running completed status on the workflow, lets try to chenge it's input and lets see if we still have a resilient service Code Change Snippet
 
-Please note that the temporal server needs to be up before the above commands work
+With that change lets look at the UI for the mode of its operation **Mode of operation
 
+Then lets see what happens after its completed Completed status
 
+Since we see how this server operates lets examine how to work with CI/CD
 
-See you soon 👋🏻.
+Deploying a fault tolerant application using CI/CD running with a temporal-server
+To deploy Temporal-server on a dashboard in a kubernetes environment run the following commands
 
+cd kubernetes && cd k8s && kubectl apply -f .
+
+And we have the Dashboard present HERE
+
+Temporal UI on Kuberenetes
+
+But lets look at it using the DevOps way
+
+AS DevOps Engineers we use Jenkins to Deploy the workloads
+We create a pipeline and then we deploy the workloads by using webhooks that has been proconfigured in the environments
+Final Remarks
+We see the importance of temporal server in ensuring resiliency and high availability of the instances
+Ruuning temporal is very vital for running microservices applications that needs high resiliency
+
+I once deployed a Java Microservice application with temporal and this application was great because temporal leveraged it's ability to send retries even when one services is down to ensure there is high availabilty at all times, without throwing up an error.
+
+This service can be improved by building it's dependence and enusring the instances are made multiple for loadBalancing and redundance
+
+That's the little i can discuss in this documentation. Thanks for making it to the end✊✊✊👊🏼🫰🫰.
